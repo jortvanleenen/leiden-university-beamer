@@ -1,0 +1,119 @@
+%% example.tex
+%% Copyright 2023- J.P. van Leenen
+%%
+%% LPPL 1.3c+
+
+\documentclass[aspectratio=169]{beamer}
+% Options:
+% - noslidenumbering (no options), disables slide numbering
+% - style=[archaeology, fgga, humanities, law, medicine, science, social], changes accent colour to match faculty
+\usetheme[
+    % % e.g.
+    % noslidenumbering,
+    % style=science,
+]{lu}
+% Set text in the left-corner of the footer, comment to disable.
+\setlufootleft{Van Leenen --- Leiden is Great}
+
+\usepackage{appendixnumberbeamer}
+\graphicspath{{graphics/}}
+
+\title{What Makes Leiden University\\Great}
+\author{A Template by Jort van Leenen}
+\institute{Based on the Official PowerPoint}
+
+\begin{document}
+    \begin{frame}[plain]
+        \titlepage
+    \end{frame}
+
+    \begin{frame}{Some Block and Styling Examples}
+        \begin{definition}
+            \textbf{Leiden University} is the \emph{oldest} Dutch institution of higher education.
+        \end{definition}
+
+        \begin{alertblock}{Housing}
+            Start searching for a place to stay \alert{as soon as possible}!
+        \end{alertblock}
+
+        \begin{exampleblock}{Open}
+            Everyone is welcome!
+        \end{exampleblock}
+    \end{frame}
+
+    \begin{frame}[fragile]{\texttt{\textbackslash accent} Usage}
+        \texttt{\textbackslash accent} behaves exactly like \texttt{\textbackslash alert}. However, one of the theme's colours can be specified as an option to allow for easy highlighting.
+
+        \begin{table}[]
+            \centering
+            \begin{tabular}{c|c}
+                \hline
+                \accent{highlighted}             & \verb|\accent{highlighted}|             \\
+                \accent[lightblue]{highlighted}  & \verb|\accent[lightblue]{highlighted}|  \\
+                \accent[midblue]{highlighted}    & \verb|\accent[midblue]{highlighted}|    \\
+                \accent[darkblue]{highlighted}   & \verb|\accent[darkblue]{highlighted}|    \\
+                \accent[red]{highlighted}        & \verb|\accent[red]{highlighted}|        \\
+                \accent[lightgreen]{highlighted} & \verb|\accent[lightgreen]{highlighted}| \\
+                \accent[darkgreen]{highlighted}  & \verb|\accent[darkgreen]{highlighted}|  \\
+                \accent[turquoise]{highlighted}  & \verb|accent[turquoise]{highlighted}|   \\
+                \accent[violet]{highlighted}     & \verb|\accent[violet]{highlighted}|     \\
+                \hline
+            \end{tabular}
+        \end{table}
+    \end{frame}
+
+    \begin{frame}{List Examples}{And a Subtitle Example as Bonus}
+        \begin{columns}[onlytextwidth]%
+        \begin{column}{.5\textwidth}%
+        \textbf{Itemize}
+        
+            \begin{itemize}
+                \item This is the first item.
+                \item This is the second item.
+                \begin{itemize}
+                    \item This is the first subitem.
+                    \begin{itemize}
+                        \item This is the first subsubitem.
+                    \end{itemize}
+                \end{itemize}
+            \end{itemize}
+        \end{column}%
+        \begin{column}{.5\textwidth}%
+            \textbf{Enumerate}
+
+            \begin{enumerate}
+                \item This is the first item.
+                \item This is the second item.
+                \begin{enumerate}
+                    \item This is the first subitem.
+                    \begin{enumerate}
+                        \item This is the first subsubitem.
+                    \end{enumerate}
+                \end{enumerate}
+            \end{enumerate}
+        \end{column}%
+    \end{columns}%
+    \end{frame}
+
+    \begin{frame}[fragile]{Listings Template}
+        Various styles have been provided with this theme for external tools. See the \texttt{styles} folder for external library and application styles. LaTeX-related styles have been added to \texttt{beamerthemelu.sty}. As an example, take the following code listing to which the Listings style \texttt{lu} has been applied.
+
+        \begin{lstlisting}[language=python, style=lu]
+print('Hello world!') # An example of Hello World in Python
+        \end{lstlisting}
+    \end{frame}
+
+    \begin{frame}[c, standout]{Standout}
+        This template reverses the colour usage. It could, for example, be used to review or recap information or draw special attention to a particular aspect.
+    \end{frame}
+
+    \begin{frame}[plain]
+        \Closure
+            {Thank you}{Questions?}
+    \end{frame}
+
+    % \appendix
+    % \begin{frame}[allowframebreaks]{References}
+    %     \printbibliography
+    % \end{frame}
+\end{document}

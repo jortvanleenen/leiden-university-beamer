@@ -1,0 +1,55 @@
+%% beamerouterthemelu.sty
+%% Copyright 2023- J.P. van Leenen
+%% LPPL 1.3c+
+
+\mode<presentation>
+
+\newif\ifbeamer@lu@showslidenumber
+\beamer@lu@showslidenumbertrue
+
+\def\beamer@lu@footleft{}
+
+\DeclareOptionBeamer{noslidenumbering}{%
+  \beamer@lu@showslidenumberfalse
+}
+\ProcessOptionsBeamer
+
+\newcommand{\setlufootleft}[1]{%
+  \def\beamer@lu@footleft{#1}%
+}
+
+\setbeamertemplate{footline}{%
+    \begin{beamercolorbox}[
+        wd=\paperwidth,
+        ht=2.6ex,
+        dp=1.3ex
+    ]{lu simple footline}%
+        \hspace*{0.07\paperwidth}%
+        \usebeamerfont{footline}%
+        \ifx\beamer@lu@footleft\@empty
+          % nothing
+        \else
+          \beamer@lu@footleft
+        \fi
+        \hfill
+        \ifbeamer@lu@showslidenumber
+          \usebeamerfont{page number in head/foot}\insertframenumber
+        \fi
+        \hspace*{0.07\paperwidth}%
+    \end{beamercolorbox}%
+    \vspace*{1.5ex}%
+}
+
+\setbeamertemplate{frametitle}{%
+    \vspace{2.25ex}%
+    \begin{beamercolorbox}[wd=\textwidth]{frametitle}
+        \usebeamerfont{frametitle}%
+        \noindent
+        \insertframetitle\strut
+        \usebeamerfont{framesubtitle}%
+        \usebeamercolor[fg]{framesubtitle}%
+        \ \insertframesubtitle\par%
+    \end{beamercolorbox}%
+}
+
+\mode<all>

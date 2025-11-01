@@ -1,0 +1,230 @@
+%% beamerthemelu.sty
+%% Copyright 2023- J.P. van Leenen
+%%
+%% LPPL 1.3c+
+
+\mode<presentation>
+% Requirements
+\RequirePackage{tikz}
+\usetikzlibrary{calc,positioning}
+\RequirePackage{fontspec}
+\RequirePackage{listings}
+
+% Options
+\DeclareOptionBeamer{style}{%
+  \PassOptionsToPackage{style=#1}{beamercolorthemelu}%
+}
+\DeclareOptionBeamer{noslidenumbering}{%
+  \PassOptionsToPackage{noslidenumbering}{beamerouterthemelu}%
+}
+\DeclareOptionBeamer{footleft}{%
+  \PassOptionsToPackage{footleft=#1}{beamerouterthemelu}%
+}
+
+\ProcessOptionsBeamer
+
+% Themes
+\usecolortheme{lu}
+\useinnertheme{lu}
+\useoutertheme{lu}
+\usecolortheme{rose}
+
+\newlength{\LUBlockPad}
+\setlength{\LUBlockPad}{.6ex}
+\newlength{\LUSeamH}
+\setlength{\LUSeamH}{1ex}
+
+% Helper macro:
+% #1 = beamercolor for title
+% #2 = beamercolor for body
+% #3 = beamerfont  for title
+% #4 = beamerfont  for body
+\newcommand{\LUblockbegin}[4]{%
+    \vspace{.5ex}
+    \begin{beamercolorbox}[
+        wd=\textwidth,
+        rounded=true,
+        sep=\LUBlockPad,
+        leftskip=\LUBlockPad,
+        rightskip=\LUBlockPad,
+    ]{#1}%
+        \usebeamerfont{#3}%
+        \insertblocktitle
+    \end{beamercolorbox}%
+
+    \vspace{-.4ex}%
+
+    \nointerlineskip
+    \begin{beamercolorbox}[
+        wd=\dimexpr\textwidth+1.32ex\relax,
+        ht=\LUSeamH,
+        dp=0pt,
+        rounded=false,
+        sep=0pt,
+        leftskip=0pt,
+        rightskip=0pt
+        ]{#2}%
+    \end{beamercolorbox}%
+
+    \vspace{-0.9ex}%
+
+    \nointerlineskip
+    \begin{beamercolorbox}[
+        wd=\textwidth,
+        rounded=true,
+        sep=\LUBlockPad,
+        leftskip=\LUBlockPad,
+        rightskip=\LUBlockPad,
+    ]{#2}%
+    \usebeamerfont{#4}%
+    \parindent=0pt%
+    \noindent
+}
+
+\newcommand{\LUblockend}{%
+    \end{beamercolorbox}%
+    \vspace{.5ex}
+}
+
+\setbeamertemplate{block begin}{%
+  \LUblockbegin{block title}{block body}{block title}{block body}%
+}
+\setbeamertemplate{block end}{%
+  \LUblockend
+}
+
+\setbeamertemplate{alerted block begin}{%
+  \LUblockbegin{block title alerted}{block body alerted}%
+               {block title alerted}{block body alerted}%
+}
+\setbeamertemplate{alerted block end}{%
+  \LUblockend
+}
+\setbeamertemplate{block alerted begin}{%
+  \LUblockbegin{block title alerted}{block body alerted}%
+               {block title alerted}{block body alerted}%
+}
+\setbeamertemplate{block alerted end}{%
+  \LUblockend
+}
+
+\setbeamertemplate{example block begin}{%
+  \LUblockbegin{block title example}{block body example}%
+               {block title example}{block body example}%
+}
+\setbeamertemplate{example block end}{%
+  \LUblockend
+}
+\setbeamertemplate{block example begin}{%
+  \LUblockbegin{block title example}{block body example}%
+               {block title example}{block body example}%
+}
+\setbeamertemplate{block example end}{%
+  \LUblockend
+}
+
+\setbeamertemplate{navigation symbols}{}
+
+\setbeamersize{text margin left=.08\paperwidth, text margin right=.08\paperwidth}
+
+% Font-related
+\usepackage{fontspec}
+\usefonttheme{professionalfonts}
+
+\setmainfont{Merriweather}[
+    UprightFont    = *-Regular,
+    BoldFont       = *-Bold,
+    ItalicFont     = *-Italic,
+    BoldItalicFont = *-BoldItalic
+]
+
+\setsansfont{Merriweather}[
+    UprightFont    = *-Regular,
+    BoldFont       = *-Bold,
+    ItalicFont     = *-Italic,
+    BoldItalicFont = *-BoldItalic
+]
+
+\newfontfamily\AltSans{Lato}[
+    UprightFont    = *-Regular,
+    BoldFont       = *-Bold,
+    ItalicFont     = *-Italic,
+    BoldItalicFont = *-BoldItalic
+]
+
+\setmonofont{IBM Plex Mono}[
+    Scale=0.97,
+]
+
+\setbeamerfont{title}{
+    series=\bfseries,
+    size=\huge
+}
+\setbeamerfont{author}{
+    size=\small,
+    series=\bfseries
+}
+
+\setbeamerfont{institute}{
+    size=\footnotesize,
+    series=\bfseries,
+    shape=\itshape
+}
+\setbeamerfont{frametitle}{
+    series=\bfseries,
+    size=\LARGE
+}
+\setbeamerfont{framesubtitle}{
+    series=\mdseries,
+    size=\large
+}
+\setbeamerfont{subtitle}{
+    series=\mdseries,
+    size=\large
+}
+\setbeamerfont{block title}{
+    series=\bfseries,
+    size=\normalsize
+}
+\setbeamerfont{block title alerted}{
+    series=\bfseries,
+    size=\normalsize
+}
+\setbeamerfont{block title example}{
+    series=\bfseries,
+    size=\normalsize
+}
+\setbeamerfont{footline}{
+    series=\mdseries,
+    size=\footnotesize
+}
+\setbeamerfont{page number in head/foot}{
+    series=\mdseries,
+    size=\tiny
+}
+
+% Custom Commands
+\def\beamer@lu@lu{LU}
+\newcommand<>{\accent}[2][orange]{%
+        {\setbeamercolor{alerted text}{fg=#1\beamer@lu@lu}%
+    \begin{alertenv}
+        #3\relax#2%
+    \end{alertenv}}%
+}
+
+% Custom Styles
+% This Listings style is primarily focused on usage with Python due to its popularity
+\lstdefinestyle{lu}{
+    showstringspaces=false,
+    upquote=true,
+    numbers=left,
+    numberstyle=\tiny,
+    frame=Ltb,
+    basicstyle=\normalsize\ttfamily,
+    keywordstyle=\color{orangeLU},       % core keywords
+    keywordstyle={[2]\color{violetLU}},  % built-ins
+    stringstyle=\color{darkgreenLU},
+    commentstyle=\color{turquoiseLU},
+}
+
+\mode<all>

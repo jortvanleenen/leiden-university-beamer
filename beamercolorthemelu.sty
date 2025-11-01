@@ -1,0 +1,71 @@
+%% beamercolorthemelu.sty
+%% Copyright 2023- J.P. van Leenen
+%%
+%% LPPL 1.3c+
+
+\mode<presentation>
+
+\DeclareOptionBeamer{style}{%
+  \def\beamer@lu@style{#1}%
+}
+\ProcessOptionsBeamer
+
+\definecolor{darkblueLU}{HTML}{001158}
+\definecolor{midblueLU}{HTML}{BCD2FF}
+\definecolor{boxLU}{HTML}{E7E9F2}
+
+\definecolor{redLU}{HTML}{BE1908}
+\definecolor{orangeLU}{HTML}{F46E32}
+\definecolor{lightgreenLU}{HTML}{9EBA2E}
+\definecolor{darkgreenLU}{HTML}{2C712D}
+\definecolor{turquoiseLU}{HTML}{34A3A9}
+\definecolor{violetLU}{HTML}{B02079}
+\definecolor{lightblueLU}{HTML}{CAD9FF}
+
+\def\beamer@lu@stylesocial{social}
+\def\beamer@lu@stylescience{science}
+\def\beamer@lu@stylehumanities{humanities}
+\def\beamer@lu@stylearchaeology{archaeology}
+\def\beamer@lu@stylefgga{fgga}
+\def\beamer@lu@stylemedicine{medicine}
+\def\beamer@lu@stylelaw{law}
+
+\ifx\beamer@lu@style\beamer@lu@stylesocial
+  \setbeamercolor*{palette primary}{fg=white,bg=redLU}%
+\else\ifx\beamer@lu@style\beamer@lu@stylescience
+  \setbeamercolor*{palette primary}{fg=white,bg=orangeLU}%
+\else\ifx\beamer@lu@style\beamer@lu@stylehumanities
+  \setbeamercolor*{palette primary}{fg=white,bg=lightgreenLU}%
+\else\ifx\beamer@lu@style\beamer@lu@stylearchaeology
+  \setbeamercolor*{palette primary}{fg=white,bg=darkgreenLU}%
+\else\ifx\beamer@lu@style\beamer@lu@stylefgga
+  \setbeamercolor*{palette primary}{fg=white,bg=turquoiseLU}%
+\else\ifx\beamer@lu@style\beamer@lu@stylemedicine
+  \setbeamercolor*{palette primary}{fg=white,bg=lightblueLU}%
+\else\ifx\beamer@lu@style\beamer@lu@stylelaw
+  \setbeamercolor*{palette primary}{fg=white,bg=violetLU}%
+\else
+  \setbeamercolor*{palette primary}{fg=white,bg=midblueLU}%
+\fi\fi\fi\fi\fi\fi\fi
+
+\setbeamercolor{structure}{fg=darkblueLU,bg=white}
+
+\setbeamercolor*{palette secondary}{fg=white,bg=darkblueLU}
+\setbeamercolor*{palette tertiary}{fg=midblueLU,bg=darkblueLU}
+\setbeamercolor*{palette quarternary}{bg=white,fg=black}
+
+\setbeamercolor*{frametitle}{bg=white,fg=darkblueLU}
+\setbeamercolor*{framesubtitle}{fg=midblueLU,bg=white}
+
+\setbeamercolor*{title}{fg=white,bg=darkblueLU}
+
+\setbeamercolor*{author}{fg=white,bg=darkblueLU}
+
+\setbeamercolor*{alerted text}{fg=orangeLU}
+\setbeamercolor*{example text}{fg=darkgreenLU}
+
+\setbeamercolor*{normal text}{fg=darkblueLU,bg=white}
+
+\setbeamercolor{lu simple footline}{fg=darkblueLU,bg=}
+
+\mode<all>

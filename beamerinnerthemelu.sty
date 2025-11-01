@@ -1,0 +1,150 @@
+%% beamerinnerthemelu.sty
+%% Copyright 2023- J.P. van Leenen
+%%
+%% LPPL 1.3c+
+
+\mode<presentation>
+
+\DeclareOptionBeamer{addstandoutfootline}{\def\beamer@lu@addstandoutfootline{#1}}
+\ProcessOptionsBeamer
+
+\pgfmathsetlengthmacro{\LULogoSize}{0.28\paperheight}
+
+\defbeamertemplate*{title page}{leidenuniv}[1][]
+{%
+    \begin{tikzpicture}[remember picture,overlay]
+        \fill[fg] (current page.north west) rectangle (current page.south east);
+
+        \node[
+            anchor=south west,
+            inner sep=0pt
+        ] at (current page.south west)
+        {\includegraphics[height=\LULogoSize]{corner-logo.png}};
+
+        \pgfmathsetlengthmacro{\LULeft}{0.1\paperwidth}
+        \pgfmathsetlengthmacro{\LUTextWidth}{0.8\paperwidth}
+        \pgfmathsetlengthmacro{\LUTitleY}{0.62\paperheight}
+        \pgfmathsetlengthmacro{\LUBlockGap}{0.27\paperheight}
+        
+        \node[
+            anchor=west,
+            align=center,
+            text=white,
+            font=\usebeamerfont{title},
+            text width=\LUTextWidth
+        ] at ($(current page.south west)+(\LULeft,\LUTitleY)$)
+        {\inserttitle};
+
+        \node[
+            anchor=west,
+            align=left,
+            text=midblueLU,
+            font=\usebeamerfont{author},
+            text width=.55\paperwidth
+        ] (authblock) at
+          ($(current page.south west)+(0.23\paperwidth,\LUTitleY-\LUBlockGap)$)
+        {\AltSans\bfseries \insertauthor};
+
+        \node[
+            anchor=north east,
+            align=right,
+            text=midblueLU,
+            font=\usebeamerfont{institute},
+            text width=.55\paperwidth
+        ] at
+          (authblock.south east)
+        {\AltSans \insertinstitute};
+    \end{tikzpicture}%
+}
+
+\newcommand{\Closure}[2]{%
+    \begin{tikzpicture}[remember picture,overlay]
+        \usebeamercolor{palette primary}
+        \fill[bg] (current page.north west)
+                           rectangle (current page.south east);
+
+        \node[anchor=south west,inner sep=0pt] at (current page.south west)
+        {\includegraphics[height=\paperheight]{circles.png}};
+
+        \node[anchor=south west,inner sep=0pt] at (current page.south west)
+        {\includegraphics[height=\LULogoSize]{corner-logo.png}};
+
+        \pgfmathsetlengthmacro{\BoxW}{0.54\paperwidth}
+        \pgfmathsetlengthmacro{\BoxH}{0.45\paperheight}
+        \pgfmathsetlengthmacro{\BoxX}{0.40\paperwidth}
+        \pgfmathsetlengthmacro{\BoxY}{0.86\paperheight}
+
+        \coordinate (TitleNW) at ($(current page.south west)+(\BoxX,\BoxY)$);
+        \coordinate (TitleSW) at ($(TitleNW)+(0,-\BoxH)$);
+        \coordinate (TitleSE) at ($(TitleNW)+(\BoxW,-\BoxH)$);
+        
+        \fill[darkblueLU] (TitleNW) rectangle (TitleSE);
+        \draw (TitleNW) rectangle (TitleSE);
+        
+        \node[
+            anchor=center,
+            align=left,
+            text=white,
+            font=\usebeamerfont{title},
+            text width=\BoxW-0.06\paperwidth
+        ] at ($(TitleNW)!0.5!(TitleSE)$)
+        {#1};
+        
+        \node[
+            anchor=west,
+            align=left,
+            text=midblueLU,
+            font=\usebeamerfont{author},
+            text width=\BoxW-0.06\paperwidth
+        ] at ($(TitleSW)+(0.035\paperwidth,0.09\paperheight)$)
+        {\AltSans #2};
+
+    \end{tikzpicture}%
+}
+
+
+\def\ps@navigation@titlepage{%
+    \setbeamertemplate{footline}[titlepage footline]
+    \@nameuse{ps@navigation}}
+\addtobeamertemplate{title page}{\thispagestyle{navigation@titlepage}}{}
+
+\defbeamertemplate*{itemize item}{lu}{%
+  {\usebeamerfont*{itemize item}\normalsize\textbullet}%
+}
+\defbeamertemplate*{itemize subitem}{lu}{%
+  {\usebeamerfont*{itemize subitem}\small\textbullet}%
+}
+\defbeamertemplate*{itemize subsubitem}{lu}{%
+  {\usebeamerfont*{itemize subsubitem}\scriptsize\textbullet}%
+}
+
+\setbeamertemplate{itemize item}[lu]
+\setbeamertemplate{itemize subitem}[lu]
+\setbeamertemplate{itemize subsubitem}[lu]
+
+\setlength{\leftmargini}{0.6cm}
+\setlength{\leftmarginii}{0.8cm}
+\setlength{\leftmarginiii}{1.0cm}
+
+\providebool{lu@standout}
+\define@key{beamerframe}{standout}[true]{
+\booltrue{lu@standout}
+\begingroup
+\color{white}
+\setbeamercolor{background canvas}{bg=darkblueLU}
+\setbeamercolor{frametitle}{fg=white,bg=darkblueLU}
+\setbeamercolor{framesubtitle}{fg=white,bg=darkblueLU}
+\ifx\beamer@lu@addstandoutfootline\@empty%
+\else%
+\setbeamertemplate{footline}{}%
+\fi%
+}
+
+\apptocmd{\beamer@reseteecodes}{%
+\ifbool{lu@standout}{%
+\endgroup
+\boolfalse{lu@standout}
+}{}
+}{}{}
+
+\mode<all>
