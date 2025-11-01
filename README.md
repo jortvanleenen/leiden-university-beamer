@@ -1,4 +1,4 @@
-![47641](https://github.com/user-attachments/assets/01175459-5b2d-4c7d-8ebd-a42ee6b58d05)
+[Leiden_University_Beamer_Theme_2_0 7.pdf](https://github.com/user-attachments/files/23281824/Leiden_University_Beamer_Theme_2_0.7.pdf)
 # Leiden University Beamer Theme
 A beamer theme that aims to closely mimic [Leiden University](https://www.leidenuniversity.nl/)'s presentation slides as provided in their [house style](https://huisstijl.leidenuniv.nl/en/).
 
@@ -41,3 +41,4 @@ A language can be provided to the beamer class as an option, this will then get 
 
 ## Copyright
 This project applies the LaTeX Project Public License version 3 (LPPL Version 1.3c  2008-05-04).
+
