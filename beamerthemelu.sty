@@ -7,8 +7,10 @@
 % Requirements
 \RequirePackage{tikz}
 \usetikzlibrary{calc,positioning}
+\RequirePackage{booktabs}
 \RequirePackage{fontspec}
 \RequirePackage{listings}
+\RequirePackage{unicode-math}
 
 % Options
 \DeclareOptionBeamer{style}{%
@@ -29,106 +31,65 @@
 \useoutertheme{lu}
 \usecolortheme{rose}
 
-\newlength{\LUBlockPad}
-\setlength{\LUBlockPad}{.6ex}
-\newlength{\LUSeamH}
-\setlength{\LUSeamH}{1ex}
+\newlength{\BlockTitlePadV}
+\newlength{\BlockBodyPadV}
 
-% Helper macro:
-% #1 = beamercolor for title
-% #2 = beamercolor for body
-% #3 = beamerfont  for title
-% #4 = beamerfont  for body
-\newcommand{\LUblockbegin}[4]{%
-    \vspace{.5ex}
-    \begin{beamercolorbox}[
-        wd=\textwidth,
-        rounded=true,
-        sep=\LUBlockPad,
-        leftskip=\LUBlockPad,
-        rightskip=\LUBlockPad,
-    ]{#1}%
-        \usebeamerfont{#3}%
-        \insertblocktitle
-    \end{beamercolorbox}%
+\setlength{\BlockTitlePadV}{0.8ex}
+\setlength{\BlockBodyPadV}{0.8ex}
 
-    \vspace{-.4ex}%
-
-    \nointerlineskip
-    \begin{beamercolorbox}[
-        wd=\dimexpr\textwidth+1.32ex\relax,
-        ht=\LUSeamH,
-        dp=0pt,
-        rounded=false,
-        sep=0pt,
-        leftskip=0pt,
-        rightskip=0pt
-        ]{#2}%
-    \end{beamercolorbox}%
-
-    \vspace{-0.9ex}%
-
-    \nointerlineskip
-    \begin{beamercolorbox}[
-        wd=\textwidth,
-        rounded=true,
-        sep=\LUBlockPad,
-        leftskip=\LUBlockPad,
-        rightskip=\LUBlockPad,
-    ]{#2}%
-    \usebeamerfont{#4}%
-    \parindent=0pt%
-    \noindent
+% Helper:
+% #1 = template base name:  block / block alerted / block example
+% #2 = upper colour name:   block title ... 
+% #3 = lower colour name:   block body ...
+% #4 = title font name:     block title ...
+% #5 = body font name:      block body ...
+\newcommand{\LUdefineblock}[5]{%
+    \defbeamertemplate*{#1 begin}{rounded padded}{%
+        \par\vskip\smallskipamount%
+        \begin{beamerboxesrounded}[
+            upper=#2,
+            lower=#3,
+            shadow=false,
+            width=\linewidth
+        ]{%
+            \vspace{\BlockTitlePadV}%
+            \usebeamerfont*{#4}\insertblocktitle\par
+            \vspace{\BlockTitlePadV}%
+        }%
+        \vspace{\BlockBodyPadV}%
+        \usebeamerfont{#5}%
+    }%
+    \defbeamertemplate*{#1 end}{rounded padded}{%
+        \vspace{\BlockBodyPadV}%
+        \end{beamerboxesrounded}%
+        \vskip\smallskipamount%
+    }%
 }
 
-\newcommand{\LUblockend}{%
-    \end{beamercolorbox}%
-    \vspace{.5ex}
-}
+\LUdefineblock{block}
+  {block title}{block body}
+  {block title}{block body}
 
-\setbeamertemplate{block begin}{%
-  \LUblockbegin{block title}{block body}{block title}{block body}%
-}
-\setbeamertemplate{block end}{%
-  \LUblockend
-}
+\LUdefineblock{block alerted}
+  {block title alerted}{block body alerted}
+  {block title alerted}{block body alerted}
 
-\setbeamertemplate{alerted block begin}{%
-  \LUblockbegin{block title alerted}{block body alerted}%
-               {block title alerted}{block body alerted}%
-}
-\setbeamertemplate{alerted block end}{%
-  \LUblockend
-}
-\setbeamertemplate{block alerted begin}{%
-  \LUblockbegin{block title alerted}{block body alerted}%
-               {block title alerted}{block body alerted}%
-}
-\setbeamertemplate{block alerted end}{%
-  \LUblockend
-}
+\LUdefineblock{block example}
+  {block title example}{block body example}
+  {block title example}{block body example}
 
-\setbeamertemplate{example block begin}{%
-  \LUblockbegin{block title example}{block body example}%
-               {block title example}{block body example}%
-}
-\setbeamertemplate{example block end}{%
-  \LUblockend
-}
-\setbeamertemplate{block example begin}{%
-  \LUblockbegin{block title example}{block body example}%
-               {block title example}{block body example}%
-}
-\setbeamertemplate{block example end}{%
-  \LUblockend
-}
+\setbeamertemplate{block begin}[rounded padded]
+\setbeamertemplate{block end}[rounded padded]
+\setbeamertemplate{block alerted begin}[rounded padded]
+\setbeamertemplate{block alerted end}[rounded padded]
+\setbeamertemplate{block example begin}[rounded padded]
+\setbeamertemplate{block example end}[rounded padded]
 
 \setbeamertemplate{navigation symbols}{}
 
 \setbeamersize{text margin left=.08\paperwidth, text margin right=.08\paperwidth}
 
 % Font-related
-\usepackage{fontspec}
 \usefonttheme{professionalfonts}
 
 \setmainfont{Merriweather}[
@@ -156,6 +117,12 @@
     Scale=0.97,
 ]
 
+\setmathfont{STIX Two Math}[
+    Scale=1.1,
+]
+
+\setbeamerfont{normal text}{size=\footnotesize}
+
 \setbeamerfont{title}{
     series=\bfseries,
     size=\huge
@@ -172,7 +139,7 @@
 }
 \setbeamerfont{frametitle}{
     series=\bfseries,
-    size=\LARGE
+    size=\Large
 }
 \setbeamerfont{framesubtitle}{
     series=\mdseries,
@@ -196,11 +163,15 @@
 }
 \setbeamerfont{footline}{
     series=\mdseries,
-    size=\footnotesize
+    size=\scriptsize
 }
 \setbeamerfont{page number in head/foot}{
     series=\mdseries,
     size=\tiny
+}
+\setbeamerfont{caption}{
+    size=\footnotesize,
+    shape=\itshape
 }
 
 % Custom Commands

@@ -3,7 +3,7 @@
 %%
 %% LPPL 1.3c+
 
-\documentclass[aspectratio=169]{beamer}
+\documentclass[aspectratio=169, 10pt]{beamer}
 % Options:
 % - noslidenumbering (no options), disables slide numbering
 % - style=[archaeology, fgga, humanities, law, medicine, science, social], changes accent colour to match faculty
@@ -13,7 +13,7 @@
     % style=science,
 ]{lu}
 % Set text in the left-corner of the footer, comment to disable.
-\setlufootleft{Van Leenen --- Leiden is Great}
+\setlufootleft{Van Leenen --- Leiden University is Great}
 
 \usepackage{appendixnumberbeamer}
 \graphicspath{{graphics/}}
@@ -41,28 +41,46 @@
         \end{exampleblock}
     \end{frame}
 
+    \begin{frame}{Some Math}
+        \textbf{Claim:} there exists an infinite amount of prime numbers
+        \begin{proof}[Proof by Contradiction]
+            Assume that the number of primes is finite, and that all such numbers are on a list: \(p_1, p_2, \dots, p_n\)
+            \smallskip
+            
+            Consider the number
+            \[N = p_1 \cdot p_2 \cdot \ldots \cdot p_n + 1\]
+            
+            For any $i \in \{1, \dots, n\}$, if we divide $N$ by $p_i$, we obtain remainder $1$. Hence no prime $p_i$ on our list divides $N$. Therefore, either $N$ itself is prime, or it has a prime factor not in our original list.
+            \smallskip
+            
+            Thus, our assumption must be false, and there must exist infinitely many prime numbers.
+        \end{proof}
+    \end{frame}
+
     \begin{frame}[fragile]{\texttt{\textbackslash accent} Usage}
         \texttt{\textbackslash accent} behaves exactly like \texttt{\textbackslash alert}. However, one of the theme's colours can be specified as an option to allow for easy highlighting.
 
-        \begin{table}[]
+        \begin{table}
             \centering
-            \begin{tabular}{c|c}
-                \hline
+            \begin{tabular}{l|l}
+                \toprule
+                \textbf{Visual}                  & \textbf{Command}                        \\
+                \midrule
                 \accent{highlighted}             & \verb|\accent{highlighted}|             \\
                 \accent[lightblue]{highlighted}  & \verb|\accent[lightblue]{highlighted}|  \\
                 \accent[midblue]{highlighted}    & \verb|\accent[midblue]{highlighted}|    \\
-                \accent[darkblue]{highlighted}   & \verb|\accent[darkblue]{highlighted}|    \\
+                \accent[darkblue]{highlighted}   & \verb|\accent[darkblue]{highlighted}|   \\
                 \accent[red]{highlighted}        & \verb|\accent[red]{highlighted}|        \\
                 \accent[lightgreen]{highlighted} & \verb|\accent[lightgreen]{highlighted}| \\
                 \accent[darkgreen]{highlighted}  & \verb|\accent[darkgreen]{highlighted}|  \\
                 \accent[turquoise]{highlighted}  & \verb|accent[turquoise]{highlighted}|   \\
                 \accent[violet]{highlighted}     & \verb|\accent[violet]{highlighted}|     \\
-                \hline
+                \bottomrule
             \end{tabular}
         \end{table}
     \end{frame}
 
-    \begin{frame}{List Examples}{And a Subtitle Example as Bonus}
+    \begin{frame}{Two Columns}{List Examples, a Figure, and a Subtitle}
         \begin{columns}[onlytextwidth]%
         \begin{column}{.5\textwidth}%
         \textbf{Itemize}
@@ -77,8 +95,7 @@
                     \end{itemize}
                 \end{itemize}
             \end{itemize}
-        \end{column}%
-        \begin{column}{.5\textwidth}%
+
             \textbf{Enumerate}
 
             \begin{enumerate}
@@ -92,6 +109,14 @@
                 \end{enumerate}
             \end{enumerate}
         \end{column}%
+        \begin{column}{.5\textwidth}%
+        \begin{figure}
+            \centering
+            \includegraphics[width=0.75\linewidth]{graphics/corner-logo.png}
+            \caption{Leiden University's Logo}
+            \label{fig:lu-logo}
+        \end{figure}
+        \end{column}%
     \end{columns}%
     \end{frame}
 
@@ -99,7 +124,12 @@
         Various styles have been provided with this theme for external tools. See the \texttt{styles} folder for external library and application styles. LaTeX-related styles have been added to \texttt{beamerthemelu.sty}. As an example, take the following code listing to which the Listings style \texttt{lu} has been applied.
 
         \begin{lstlisting}[language=python, style=lu]
-print('Hello world!') # An example of Hello World in Python
+"""A small code example in Python"""
+def sayHi(who: str) -> None:
+    print(f'Hi {who}!')
+
+
+sayHi('Jort')
         \end{lstlisting}
     \end{frame}
 
@@ -112,6 +142,7 @@ print('Hello world!') # An example of Hello World in Python
             {Thank you}{Questions?}
     \end{frame}
 
+    % To add references, uncomment below, and be sure to set your reference file.
     % \appendix
     % \begin{frame}[allowframebreaks]{References}
     %     \printbibliography
