@@ -1,10 +1,10 @@
-![Leiden_University_Beamer_Theme_2_0(7)-afbeeldingen-0](https://github.com/user-attachments/assets/b3228812-5f8a-4583-b4ea-260ed9ed7707)
+![Leiden_University_Beamer_Theme_2_0_page-0001](https://github.com/user-attachments/assets/3dc0fcb0-411b-4188-a68a-96c7e2ad656b)
 
 # Leiden University Beamer Theme
 A beamer theme that aims to closely mimic [Leiden University](https://www.leidenuniversity.nl/)'s presentation slides as provided in their [house style](https://huisstijl.leidenuniv.nl/en/).
 
 ## Getting Started
-The Beamer class and, therefore, this theme, can be used with the following installations: pdfLaTeX, LaTeX+dvips, LuaLaTeX and XeLaTeX.
+The Beamer class and, therefore, this theme, can be used with the following installations: LaTeX+dvips, LuaLaTeX, and XeLaTeX.
 It has only been tested through [Overleaf](https://www.overleaf.com).
 
 To get started, I recommend modifying `example.tex` to your liking.
@@ -18,7 +18,7 @@ This repository can be downloaded as an archive and extracted to the location of
 Feel free to remove the `README.md` and `.gitignore` files.
 These do not affect the actual presentation in any way; they are used for working with Git and documentation purposes.
 
-## Options
+## Global Options
 - `noslidenumbering` (no options), disables slide numbering.
 
 - `style=[archaeology, fgga, humanities, law, medicine, science, social]`, changes accent colour to match faculty.
@@ -32,10 +32,12 @@ Issues for bugs and feature requests are welcome. Pull requests are appreciated 
 This project applies the LaTeX Project Public License version 3 (LPPL Version 1.3c  2008-05-04).
 
 ## Additional Example Images
-![Leiden_University_Beamer_Theme_2_0(7)-afbeeldingen-1](https://github.com/user-attachments/assets/f237b98f-43b7-44a8-989f-29dcabf2c60c)
-![Leiden_University_Beamer_Theme_2_0(7)-afbeeldingen-2](https://github.com/user-attachments/assets/87dec1f6-3d8f-41ca-a917-26727af72d71)
-![Leiden_University_Beamer_Theme_2_0(7)-afbeeldingen-3](https://github.com/user-attachments/assets/355aa9d5-b155-4a6b-b6ee-98b6edfdd5c6)
-![Leiden_University_Beamer_Theme_2_0(7)-afbeeldingen-4](https://github.com/user-attachments/assets/257722eb-a587-488d-81eb-f79839357a5b)
-![Leiden_University_Beamer_Theme_2_0(7)-afbeeldingen-5](https://github.com/user-attachments/assets/8ad00f96-ce80-4439-af65-d4a623bfd15d)
-![Leiden_University_Beamer_Theme_2_0(7)-afbeeldingen-6](https://github.com/user-attachments/assets/83a62035-6b49-4610-a3f5-d45da296a51b)
-![Leiden_University_Beamer_Theme_2_0(7)-afbeeldingen-7](https://github.com/user-attachments/assets/ba98a201-0234-48d8-b631-07e46d89c8c2)
+![Leiden_University_Beamer_Theme_2_0_page-0002](https://github.com/user-attachments/assets/aa9ab6af-43c5-4bce-9381-7b7b14e9908a)
+![Leiden_University_Beamer_Theme_2_0_page-0003](https://github.com/user-attachments/assets/4e2e4787-9c8f-4e77-8e88-b8cbbf078184)
+![Leiden_University_Beamer_Theme_2_0_page-0004](https://github.com/user-attachments/assets/e40b666b-88f2-4490-94b9-27e1c2cfe72b)
+![Leiden_University_Beamer_Theme_2_0_page-0005](https://github.com/user-attachments/assets/278385dd-c091-400d-89d6-0fa95c78951d)
+![Leiden_University_Beamer_Theme_2_0_page-0006](https://github.com/user-attachments/assets/b61d0002-815b-4802-af92-4db520165e97)
+![Leiden_University_Beamer_Theme_2_0_page-0007](https://github.com/user-attachments/assets/9670b8b9-ab82-4e65-a3ad-7ec6990cbce4)
+![Leiden_University_Beamer_Theme_2_0_page-0008](https://github.com/user-attachments/assets/f920fbeb-fe0a-4b81-bd3d-809d6ff1c567)
+![Leiden_University_Beamer_Theme_2_0_page-0009](https://github.com/user-attachments/assets/94e952af-0210-4aba-bf81-665fbb6da1ec)
+![Leiden_University_Beamer_Theme_2_0_page-0010](https://github.com/user-attachments/assets/6b90a79e-b6d2-481a-a302-3c7799d1510c)
