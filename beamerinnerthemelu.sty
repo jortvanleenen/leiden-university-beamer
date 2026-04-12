@@ -1,79 +1,262 @@
-%% beamerouterthemelu.sty
+%% beamerinnerthemelu.sty
 %% Copyright 2023- J.P. van Leenen
+%%
 %% LPPL 1.3c+
 
 \mode<presentation>
 
-\newif\ifbeamer@lu@showslidenumber
-\beamer@lu@showslidenumbertrue
-
-\def\beamer@lu@footleft{}
-
-\DeclareOptionBeamer{noslidenumbering}{%
-    \beamer@lu@showslidenumberfalse
-}
+\DeclareOptionBeamer{addstandoutfootline}{\def\beamer@lu@addstandoutfootline{#1}}
 \ProcessOptionsBeamer
 
-\newcommand{\setlufootleft}[1]{%
-    \def\beamer@lu@footleft{#1}%
+\pgfmathsetlengthmacro{\LULogoSize}{0.28\paperheight}
+
+\def\LUTitleLogoOne{}
+\def\LUTitleLogoTwo{}
+\newcommand{\settitlelogo}[2][1]{%
+    \ifnum
+        #1=1 \def\LUTitleLogoOne{#2}
+    \fi
+    \ifnum
+        #1=2 \def\LUTitleLogoTwo{#2}
+    \fi
 }
 
-\newdimen\lusidebar@textwidth
-\lusidebar@textwidth=\paperwidth
-\def\lusidebar@offset{0pt}
-\lusidebar@rightfalse
-\lusidebar@activefalse
+\defbeamertemplate*{title page}{leidenuniv}[1][]
+{%
+    \begin{tikzpicture}[remember picture,overlay]
+        \fill[fg] (current page.north west) rectangle (current page.south east);
 
-\setbeamertemplate{footline}{%
-    \begin{beamercolorbox}[
-        wd=\paperwidth,
-        ht=2.6ex,
-        dp=1.3ex
-    ]{lu simple footline}%
-        \iflusidebar@active
-        \iflusidebar@right\else \hspace*{\lusidebar@offset}\hspace*{0.03\paperwidth}\fi
-        \fi
-        \hspace*{0.07\paperwidth}%
-        \usebeamerfont{footline}%
+        \node[
+            anchor=south west,
+            inner sep=0pt
+        ] at (current page.south west)
+            {\includegraphics[height=\LULogoSize]{components/corner-logo}};
+
         \ifx
-            \beamer@lu@footleft\@empty
-        % nothing
-        \else
-            \beamer@lu@footleft
+            \LUTitleLogoOne\empty\else
+            \ifx
+                \LUTitleLogoTwo\empty
+                \node[
+                    anchor=south,
+                    inner sep=0pt
+                ] at ($(current page.south west)+(0.65\paperwidth,0.06\paperheight)$)
+                    {\includegraphics[height=0.12\paperheight]{\LUTitleLogoOne}};
+            \else
+                \node[
+                    anchor=south,
+                    inner sep=0pt
+                ] at ($(current page.south west)+(0.55\paperwidth,0.06\paperheight)$)
+                    {\includegraphics[height=0.12\paperheight]{\LUTitleLogoOne}};
+                \node[
+                    anchor=south,
+                    inner sep=0pt
+                ] at ($(current page.south west)+(0.78\paperwidth,0.06\paperheight)$)
+                    {\includegraphics[height=0.12\paperheight]{\LUTitleLogoTwo}};
+            \fi
         \fi
-        \hfill
-        \ifbeamer@lu@showslidenumber
-        \usebeamerfont{page number in head/foot}%
-        \iflusidebar@active\iflusidebar@right\color{lightblueLU}\fi\fi
-        \insertframenumber
-        \fi
-        \hspace*{0.07\paperwidth}%
-    \end{beamercolorbox}%
-    \vspace*{1.5ex}%
+
+        \pgfmathsetlengthmacro{\LULeft}{0.1\paperwidth}
+        \pgfmathsetlengthmacro{\LUTextWidth}{0.8\paperwidth}
+        \pgfmathsetlengthmacro{\LUTitleY}{0.62\paperheight}
+        \pgfmathsetlengthmacro{\LUBlockGap}{0.27\paperheight}
+
+        \node[
+            anchor=west,
+            align=center,
+            text=white,
+            font=\usebeamerfont{title},
+            text width=\LUTextWidth
+        ] at ($(current page.south west)+(\LULeft,\LUTitleY)$)
+            {\inserttitle};
+
+        \node[
+            anchor=west,
+            align=left,
+            text=midblueLU,
+            font=\usebeamerfont{author},
+            text width=.55\paperwidth
+        ] (authblock) at
+        ($(current page.south west)+(0.23\paperwidth,\LUTitleY-\LUBlockGap)$)
+            {\AltSans\bfseries \insertauthor};
+
+        \node[
+            anchor=north east,
+            align=right,
+            text=midblueLU,
+            font=\usebeamerfont{institute},
+            text width=.55\paperwidth
+        ] at
+        (authblock.south east)
+            {\AltSans \insertinstitute};
+    \end{tikzpicture}%
 }
 
-\newdimen\lusidebar@titlewidth
-\AtBeginDocument{\lusidebar@titlewidth=\paperwidth}
-\lusidebar@titlewidth=\paperwidth
+\newif\ifclosure@background
+\newif\ifclosure@circles
 
-\setbeamertemplate{frametitle}{%
-    \vspace{2.25ex}%
-    \begin{beamercolorbox}[
-        wd=\paperwidth
-    ]{frametitle}%
-        \hspace*{0.07\paperwidth}%
-        \iflusidebar@active
-        \iflusidebar@right\else \hspace*{\lusidebar@offset}\fi
-        \fi
-        \parbox[t]{\dimexpr\lusidebar@textwidth-0.07\paperwidth\relax}{%
-            \raggedright
-            \usebeamerfont{frametitle}%
-            \insertframetitle\strut\ %
-            \usebeamerfont{framesubtitle}%
-            \usebeamercolor[fg]{framesubtitle}%
-            \insertframesubtitle%
-        }\par%
-    \end{beamercolorbox}%
+\pgfkeys{
+    /closure/.is family, /closure,
+    default/.style = {
+        background = false,
+        circles = true
+    },
+    background/.is if = closure@background,
+    circles/.is if = closure@circles
 }
+
+\newcommand{\Closure}[3][]{%
+    \pgfkeys{/closure, default, #1}
+
+    \begin{tikzpicture}[remember picture,overlay]
+    \usebeamercolor{palette primary}
+    \fill[bg] (current page.north west)
+    rectangle (current page.south east);
+
+    \ifclosure@background
+    \node[anchor=center,inner sep=0pt] at (current page.center)
+        {\includegraphics[width=\paperwidth,height=\paperheight]{components/leiden-flag}};
+    \fi
+
+    \ifclosure@circles
+    \node[anchor=south west,inner sep=0pt] at (current page.south west)
+        {\includegraphics[height=\paperheight]{components/circles}};
+    \fi
+
+    \node[anchor=south west,inner sep=0pt] at (current page.south west)
+        {\includegraphics[height=\LULogoSize]{components/corner-logo}};
+
+    \pgfmathsetlengthmacro{\BoxW}{0.42\paperwidth}
+    \pgfmathsetlengthmacro{\BoxH}{0.38\paperheight}
+    \pgfmathsetlengthmacro{\BoxX}{0.54\paperwidth}
+    \pgfmathsetlengthmacro{\BoxY}{0.83\paperheight}
+
+    \coordinate (TitleNW) at ($(current page.south west)+(\BoxX,\BoxY)$);
+    \coordinate (TitleSW) at ($(TitleNW)+(0,-\BoxH)$);
+    \coordinate (TitleSE) at ($(TitleNW)+(\BoxW,-\BoxH)$);
+
+    \fill[darkblueLU] (TitleNW) rectangle (TitleSE);
+    \draw (TitleNW) rectangle (TitleSE);
+
+    \node[
+        anchor=center,
+        align=left,
+        text=white,
+        font=\usebeamerfont{title},
+        text width=\BoxW-0.06\paperwidth
+    ] at ($(TitleNW)!0.5!(TitleSE)$)
+        {#2};
+
+    \node[
+        anchor=west,
+        align=left,
+        text=midblueLU,
+        font=\usebeamerfont{author},
+        text width=\BoxW-0.06\paperwidth
+    ] at ($(TitleSW)+(0.035\paperwidth,0.09\paperheight)$)
+        {\AltSans #3};
+
+    \end{tikzpicture}%
+}
+
+\newif\iflusidebar@right
+\newif\iflusidebar@large
+\newif\iflusidebar@active
+\def\lusidebar@color{blue}
+
+\pgfkeys{
+    /lusidebar/.is family, /lusidebar,
+    default/.style = { side = left, size = small, color = blue },
+    side/.is choice,
+    side/left/.code  = {\lusidebar@rightfalse},
+    side/right/.code = {\lusidebar@righttrue},
+    size/.is choice,
+    size/small/.code = {\lusidebar@largefalse},
+    size/large/.code = {\lusidebar@largetrue},
+    color/.is choice,
+    color/blue/.code     = {\def\lusidebar@color{blue}},
+    color/darkblue/.code = {\def\lusidebar@color{darkblue}}
+}
+
+\newenvironment{sideframe}[3][]{%
+    \pgfkeys{/lusidebar/.cd, default, #1}%
+    \iflusidebar@large
+    \def\lusidebar@size{large}%
+    \def\lusidebar@offset{0.40\paperwidth}%
+    \else
+    \def\lusidebar@size{small}%
+    \def\lusidebar@offset{0.17\paperwidth}%
+    \fi
+    \lusidebar@activetrue
+    \edef\lusidebar@file{components/\lusidebar@size-\lusidebar@color}%
+    \lusidebar@textwidth=\paperwidth
+    \advance\lusidebar@textwidth by -\lusidebar@offset
+    \advance\lusidebar@textwidth by -0.15\paperwidth
+    \lusidebar@titlewidth=\lusidebar@textwidth
+    \begin{frame}{#2}{#3}%
+    \begin{tikzpicture}[remember picture, overlay]
+    \iflusidebar@right
+    \node[anchor=east, inner sep=0pt] at (current page.east)
+        {\includegraphics[height=\paperheight]{\lusidebar@file}};
+    \else
+    \node[anchor=west, inner sep=0pt] at (current page.west)
+        {\scalebox{-1}[1]{\includegraphics[height=\paperheight]{\lusidebar@file}}};
+    \fi
+    \end{tikzpicture}%
+    \iflusidebar@right\else \hspace*{\lusidebar@offset}\fi
+    \minipage[t]{\lusidebar@textwidth}%
+}{%
+    \endminipage
+    \end{frame}%
+    \lusidebar@textwidth=\paperwidth
+    \def\lusidebar@offset{0pt}%
+    \lusidebar@rightfalse
+    \lusidebar@activefalse
+    \lusidebar@titlewidth=\paperwidth
+}
+
+\def\ps@navigation@titlepage{%
+    \setbeamertemplate{footline}[titlepage footline]
+    \@nameuse{ps@navigation}}
+\addtobeamertemplate{title page}{\thispagestyle{navigation@titlepage}}{}
+
+\defbeamertemplate*{itemize item}{lu}{%
+        {\usebeamerfont*{itemize item}\normalsize\textbullet}%
+}
+\defbeamertemplate*{itemize subitem}{lu}{%
+        {\usebeamerfont*{itemize subitem}\small\textbullet}%
+}
+\defbeamertemplate*{itemize subsubitem}{lu}{%
+        {\usebeamerfont*{itemize subsubitem}\scriptsize\textbullet}%
+}
+
+\setbeamertemplate{itemize item}[lu]
+\setbeamertemplate{itemize subitem}[lu]
+\setbeamertemplate{itemize subsubitem}[lu]
+
+\setlength{\leftmargini}{0.6cm}
+\setlength{\leftmarginii}{0.8cm}
+\setlength{\leftmarginiii}{1.0cm}
+
+\providebool{lu@standout}
+\define@key{beamerframe}{standout}[true]{
+    \booltrue{lu@standout}
+    \begingroup
+    \color{white}
+    \setbeamercolor{background canvas}{bg=darkblueLU}
+    \setbeamercolor{frametitle}{fg=white,bg=darkblueLU}
+    \setbeamercolor{framesubtitle}{fg=white,bg=darkblueLU}
+    \ifx
+        \beamer@lu@addstandoutfootline\@empty%
+    \else%
+        \setbeamertemplate{footline}{}%
+    \fi%
+}
+
+\apptocmd{\beamer@reseteecodes}{%
+    \ifbool{lu@standout}{%
+        \endgroup
+        \boolfalse{lu@standout}
+    }{}
+}{}{}
 
 \mode<all>
