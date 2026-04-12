@@ -5,22 +5,23 @@
 
 \mode<presentation>
 % Requirements
-\RequirePackage{tikz}
-\usetikzlibrary{calc,positioning}
 \RequirePackage{booktabs}
+\RequirePackage{etoolbox}
 \RequirePackage{fontspec}
 \RequirePackage{listings}
+\RequirePackage{tikz}
+\usetikzlibrary{calc,positioning}
 \RequirePackage{unicode-math}
 
 % Options
 \DeclareOptionBeamer{style}{%
-  \PassOptionsToPackage{style=#1}{beamercolorthemelu}%
+    \PassOptionsToPackage{style=#1}{beamercolorthemelu}%
 }
 \DeclareOptionBeamer{noslidenumbering}{%
-  \PassOptionsToPackage{noslidenumbering}{beamerouterthemelu}%
+    \PassOptionsToPackage{noslidenumbering}{beamerouterthemelu}%
 }
 \DeclareOptionBeamer{footleft}{%
-  \PassOptionsToPackage{footleft=#1}{beamerouterthemelu}%
+    \PassOptionsToPackage{footleft=#1}{beamerouterthemelu}%
 }
 
 \ProcessOptionsBeamer
@@ -39,7 +40,7 @@
 
 % Helper:
 % #1 = template base name:  block / block alerted / block example
-% #2 = upper colour name:   block title ... 
+% #2 = upper colour name:   block title ...
 % #3 = lower colour name:   block body ...
 % #4 = title font name:     block title ...
 % #5 = body font name:      block body ...
@@ -67,16 +68,16 @@
 }
 
 \LUdefineblock{block}
-  {block title}{block body}
-  {block title}{block body}
+{block title}{block body}
+{block title}{block body}
 
 \LUdefineblock{block alerted}
-  {block title alerted}{block body alerted}
-  {block title alerted}{block body alerted}
+{block title alerted}{block body alerted}
+{block title alerted}{block body alerted}
 
 \LUdefineblock{block example}
-  {block title example}{block body example}
-  {block title example}{block body example}
+{block title example}{block body example}
+{block title example}{block body example}
 
 \setbeamertemplate{block begin}[rounded padded]
 \setbeamertemplate{block end}[rounded padded]
@@ -106,11 +107,9 @@
     BoldItalicFont = *-BoldItalic
 ]
 
-\newfontfamily\AltSans{Lato}[
-    UprightFont    = *-Regular,
-    BoldFont       = *-Bold,
-    ItalicFont     = *-Italic,
-    BoldItalicFont = *-BoldItalic
+\newfontfamily\AltSans{Noto Sans}[
+    UprightFont = *-Light,
+    BoldFont    = *-Regular
 ]
 
 \setmonofont{IBM Plex Mono}[
@@ -179,7 +178,7 @@
 \newcommand<>{\accent}[2][orange]{%
         {\setbeamercolor{alerted text}{fg=#1\beamer@lu@lu}%
     \begin{alertenv}
-        #3\relax#2%
+    #3\relax#2%
     \end{alertenv}}%
 }
 

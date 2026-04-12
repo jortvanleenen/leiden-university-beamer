@@ -8,9 +8,9 @@
 % - noslidenumbering (no options), disables slide numbering
 % - style=[archaeology, fgga, humanities, law, medicine, science, social], changes accent colour to match faculty
 \usetheme[
-    % % e.g.
-    % noslidenumbering,
-    % style=science,
+% % e.g.
+% noslidenumbering,
+% style=science,
 ]{lu}
 % Set text in the left-corner of the footer, comment to disable.
 \setlufootleft{Van Leenen --- Leiden University is Great}
@@ -24,6 +24,9 @@
 
 \begin{document}
     \begin{frame}[plain]
+        % Optionally: specify up to two logos for the title page
+        \settitlelogo[1]{logos/liacs}
+        \settitlelogo[2]{logos/ludev}
         \titlepage
     \end{frame}
 
@@ -46,16 +49,35 @@
         \begin{proof}[Proof by Contradiction]
             Assume that the number of primes is finite, and that all such numbers are on a list: \(p_1, p_2, \dots, p_n\)
             \smallskip
-            
+
             Consider the number
             \[N = p_1 \cdot p_2 \cdot \ldots \cdot p_n + 1\]
-            
+
             For any $i \in \{1, \dots, n\}$, if we divide $N$ by $p_i$, we obtain remainder $1$. Hence no prime $p_i$ on our list divides $N$. Therefore, either $N$ itself is prime, or it has a prime factor not in our original list.
             \smallskip
-            
+
             Thus, our assumption must be false, and there must exist infinitely many prime numbers.
         \end{proof}
     \end{frame}
+
+    % Note: to work around limitations, even if no subtitle is provided to a sideframe, the (empty) second pair '{...}' must be specified
+    \begin{sideframe}{Default Side Frame}{}
+        The \texttt{sideframe} environment offers decorative sides to be placed. The following options can be supplied:
+
+        \begin{itemize}
+            \item \texttt{side}: left or right
+            \item \texttt{size}: small or large
+            \item \texttt{color}: blue or darkblue
+        \end{itemize}
+
+        By default, the environment applies the styling of this slide (\texttt{left}, \texttt{small}, \texttt{blue}).
+        To see the other options in action, checkout the next slide!
+
+    \end{sideframe}
+
+    \begin{sideframe}[side=right,size=large,color=darkblue]{Another Slide Frame}{With a Long Subtitle to Show Wrapping}
+        Amazing!
+    \end{sideframe}
 
     \begin{frame}[fragile]{\texttt{\textbackslash accent} Usage}
         \texttt{\textbackslash accent} behaves exactly like \texttt{\textbackslash alert}. However, one of the theme's colours can be specified as an option to allow for easy highlighting.
@@ -82,42 +104,42 @@
 
     \begin{frame}{Two Columns}{List Examples, a Figure, and a Subtitle}
         \begin{columns}[onlytextwidth]%
-        \begin{column}{.5\textwidth}%
-        \textbf{Itemize}
-        
-            \begin{itemize}
-                \item This is the first item.
-                \item This is the second item.
+            \begin{column}{.5\textwidth}%
+                \textbf{Itemize}
+
                 \begin{itemize}
-                    \item This is the first subitem.
+                    \item This is the first item.
+                    \item This is the second item.
                     \begin{itemize}
-                        \item This is the first subsubitem.
+                        \item This is the first subitem.
+                        \begin{itemize}
+                            \item This is the first subsubitem.
+                        \end{itemize}
                     \end{itemize}
                 \end{itemize}
-            \end{itemize}
 
-            \textbf{Enumerate}
+                \textbf{Enumerate}
 
-            \begin{enumerate}
-                \item This is the first item.
-                \item This is the second item.
                 \begin{enumerate}
-                    \item This is the first subitem.
+                    \item This is the first item.
+                    \item This is the second item.
                     \begin{enumerate}
-                        \item This is the first subsubitem.
+                        \item This is the first subitem.
+                        \begin{enumerate}
+                            \item This is the first subsubitem.
+                        \end{enumerate}
                     \end{enumerate}
                 \end{enumerate}
-            \end{enumerate}
-        \end{column}%
-        \begin{column}{.5\textwidth}%
-        \begin{figure}
-            \centering
-            \includegraphics[width=0.75\linewidth]{graphics/corner-logo.png}
-            \caption{Leiden University's Logo}
-            \label{fig:lu-logo}
-        \end{figure}
-        \end{column}%
-    \end{columns}%
+            \end{column}%
+            \begin{column}{.5\textwidth}%
+                \begin{figure}
+                    \centering
+                    \includegraphics[width=0.75\linewidth]{graphics/components/corner-logo.png}
+                    \caption{Leiden University's Logo}
+                    \label{fig:lu-logo}
+                \end{figure}
+            \end{column}%
+        \end{columns}%
     \end{frame}
 
     \begin{frame}[fragile]{Listings Template}
@@ -138,8 +160,7 @@ sayHi('Jort')
     \end{frame}
 
     \begin{frame}[plain]
-        \Closure
-            {Thank you}{Questions?}
+        \Closure[background=true,circles=true]{Thank you}{Questions?}
     \end{frame}
 
     % To add references, uncomment below, and be sure to set your reference file.

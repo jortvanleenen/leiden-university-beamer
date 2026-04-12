@@ -6,7 +6,7 @@
 \mode<presentation>
 
 \DeclareOptionBeamer{style}{%
-  \def\beamer@lu@style{#1}%
+    \def\beamer@lu@style{#1}%
 }
 \ProcessOptionsBeamer
 
@@ -30,23 +30,42 @@
 \def\beamer@lu@stylemedicine{medicine}
 \def\beamer@lu@stylelaw{law}
 
-\ifx\beamer@lu@style\beamer@lu@stylesocial
-  \setbeamercolor*{palette primary}{fg=white,bg=redLU}%
-\else\ifx\beamer@lu@style\beamer@lu@stylescience
-  \setbeamercolor*{palette primary}{fg=white,bg=orangeLU}%
-\else\ifx\beamer@lu@style\beamer@lu@stylehumanities
-  \setbeamercolor*{palette primary}{fg=white,bg=lightgreenLU}%
-\else\ifx\beamer@lu@style\beamer@lu@stylearchaeology
-  \setbeamercolor*{palette primary}{fg=white,bg=darkgreenLU}%
-\else\ifx\beamer@lu@style\beamer@lu@stylefgga
-  \setbeamercolor*{palette primary}{fg=white,bg=turquoiseLU}%
-\else\ifx\beamer@lu@style\beamer@lu@stylemedicine
-  \setbeamercolor*{palette primary}{fg=white,bg=lightblueLU}%
-\else\ifx\beamer@lu@style\beamer@lu@stylelaw
-  \setbeamercolor*{palette primary}{fg=white,bg=violetLU}%
+\ifx
+    \beamer@lu@style\beamer@lu@stylesocial
+    \setbeamercolor*{palette primary}{fg=white,bg=redLU}%
 \else
-  \setbeamercolor*{palette primary}{fg=white,bg=midblueLU}%
-\fi\fi\fi\fi\fi\fi\fi
+    \ifx
+        \beamer@lu@style\beamer@lu@stylescience
+        \setbeamercolor*{palette primary}{fg=white,bg=orangeLU}%
+    \else
+        \ifx
+            \beamer@lu@style\beamer@lu@stylehumanities
+            \setbeamercolor*{palette primary}{fg=white,bg=lightgreenLU}%
+        \else
+            \ifx
+                \beamer@lu@style\beamer@lu@stylearchaeology
+                \setbeamercolor*{palette primary}{fg=white,bg=darkgreenLU}%
+            \else
+                \ifx
+                    \beamer@lu@style\beamer@lu@stylefgga
+                    \setbeamercolor*{palette primary}{fg=white,bg=turquoiseLU}%
+                \else
+                    \ifx
+                        \beamer@lu@style\beamer@lu@stylemedicine
+                        \setbeamercolor*{palette primary}{fg=white,bg=lightblueLU}%
+                    \else
+                        \ifx
+                            \beamer@lu@style\beamer@lu@stylelaw
+                            \setbeamercolor*{palette primary}{fg=white,bg=violetLU}%
+                        \else
+                            \setbeamercolor*{palette primary}{fg=white,bg=midblueLU}%
+                        \fi
+                    \fi
+                \fi
+            \fi
+        \fi
+    \fi
+\fi
 
 \setbeamercolor{structure}{fg=darkblueLU,bg=white}
 
@@ -55,7 +74,7 @@
 \setbeamercolor*{palette quarternary}{bg=white,fg=black}
 
 \setbeamercolor*{frametitle}{bg=white,fg=darkblueLU}
-\setbeamercolor*{framesubtitle}{fg=midblueLU,bg=white}
+\setbeamercolor*{framesubtitle}{fg=darkblueLU,bg=white}
 
 \setbeamercolor*{title}{fg=white,bg=darkblueLU}
 
